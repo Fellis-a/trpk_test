@@ -13,7 +13,7 @@ public class GUI extends JFrame {
     JPanel panelTask;
     JPanel panelGraph;
     JLabel lbl1;
-    JLabel lblMain;
+    JLabel lblRes;
     JTextField radius;
     JButton start;
     private Dimension area;
@@ -27,14 +27,14 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        JPanel grid = new JPanel(new GridLayout(3, 1, 5, 5) );
+
+        JPanel flow1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel instructionsLeft = new JLabel(
                 "Программа предназначена для отображения фигуры и рассчета площади закрашенной области");
-        JLabel instructionsRight = new JLabel(
-                "                        ");
-        JPanel instructionPanel = new JPanel(new GridLayout(0,1));
-        instructionPanel.setFocusable(true);
-        instructionPanel.add(instructionsLeft);
-        instructionPanel.add(instructionsRight);
+
+        flow1.add(instructionsLeft);
+        grid.add(flow1);
 
         //панель параметров
         //panelButton = new JPanel();
@@ -65,9 +65,8 @@ public class GUI extends JFrame {
         lbl1 = new JLabel("Введите радиус окружности");
             radius = new JTextField("", 5);
 
-
-
         start = new JButton("Рассчитать!");
+        lblRes =  new JLabel(" Площадь равна: " );
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,8 +74,8 @@ public class GUI extends JFrame {
                 a = Integer.parseInt(radius.getText());
                 if(a>0){
                 areaCircle = new areaCircle(a);
-                JOptionPane.showMessageDialog(GUI.this,
-                        "Площадь равна: " + areaCircle.calculate());
+                lblRes = new JLabel("Площадь равна: " + areaCircle.calculate());
+
                 drawArea.setCircleSize(a); // вызываем изменение размером
             }else{
                 JOptionPane.showMessageDialog(GUI.this, "Введите целое число больше нуля!");
@@ -86,20 +85,20 @@ public class GUI extends JFrame {
             }
         });
 
-        instructionPanel.add(start);
+
+
+        JPanel flow = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flow.add(lbl1);
+        flow.add(radius);
+        flow.add(start);
+        grid.add(flow);
+        grid.add(lblRes);
 
         //Lay out this demo.
-        add(instructionPanel, BorderLayout.PAGE_START);
+        add(grid, BorderLayout.PAGE_START);
         add(scroller, BorderLayout.CENTER);
 
-        //panelTask.add(lblMain);
-        instructionPanel.add(lbl1);
-        instructionPanel.add(radius);
-        instructionPanel.add(start);
-
-        //panel.add(panelTask, BorderLayout.PAGE_START);
         panel.add(panelGraph, BorderLayout.CENTER);
-        //panel.add(panelButton, BorderLayout.PAGE_END);
 
         getContentPane().add(panel);
     }

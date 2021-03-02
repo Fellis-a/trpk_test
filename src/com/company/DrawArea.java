@@ -30,7 +30,7 @@ public class DrawArea extends JPanel {
 
         // чтобы при изменении размеров формы пересчитывался размер
         // в качестве стороны используем минимальную сторону панели
-        int height = (int)((1.0 * this.getHeight() / this.defaultSize) * ((int) radius * 2 * 65));
+        int height = (int)((1.0 * this.getHeight() / this.defaultSize) * ((int) radius * 2 * 69));
 
 
         RenderingHints rh = new RenderingHints(
@@ -41,7 +41,7 @@ public class DrawArea extends JPanel {
                 RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHints(rh);
 
-        g2.setPaint(Color.GREEN);
+        g2.setPaint(Color.BLUE);
         Area a1 = new Area(createSimpleStar(height/2,height,height));
         Area a2 = new Area(new Ellipse2D.Double(height/2,  height/2, height, height));
 
